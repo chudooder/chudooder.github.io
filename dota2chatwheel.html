@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Dota 2 Chat Wheel Scripter </title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<script src="jquery-2.0.3.js"></script>
+	<!--Set up the phrase list-->
+	<script>
+		function phrase(name, gameindex) {
+			this.name = name;
+			this.gameindex = gameindex;
+		}
+
+		var phraseList = [
+			new phrase("Careful!", 		1),
+			new phrase("Get Back!", 	2),
+			new phrase("Stun now!", 	4),
+			new phrase("Push now", 		6),
+			new phrase("Go!", 			12),
+			new phrase("Initiate!", 	13),
+			new phrase("Follow me", 	14),
+			new phrase("Group up", 		15),
+			new phrase("Spread out", 	16),
+			new phrase("Split up and farm", 17),
+			new phrase("Attack now!", 	18),
+			new phrase("Be right back", 19),
+			new phrase("Dive!", 		20),
+			new phrase("On my way", 	21),
+			new phrase("Bait", 			23),
+			new phrase("Help!",			5),
+			new phrase("Heal",			24),
+			new phrase("Mana",			25),
+			new phrase("Out of mana",	26),
+			new phrase("Skills on cooldown",	27),
+			new phrase("Ultimate ready",		28),
+			new phrase("Missing!",				8),
+			new phrase("Missing top!",			9),
+			new phrase("Missing mid!",			10),
+			new phrase("Missing bottom!",		11),
+			new phrase("Enemy returned",		29),
+			new phrase("All enemy heroes missing!",		30),
+			new phrase("Enemy incoming!",				31),
+			new phrase("Invisible enemy nearby!",		32),
+			new phrase("Enemy has rune",				33),
+			new phrase("Split push",			34),
+			new phrase("Coming to gank",		35),
+			new phrase("Requesting a gank",		36),
+			new phrase("Fight under the tower",	37),
+			new phrase("Deny the tower!",		38),
+			new phrase("We need wards.",		3),			
+			new phrase("Buy a courier please",	39),			
+			new phrase("Can anyone upgrade the courier?",	40),			
+			new phrase("We need detection",		41),			
+			new phrase("They have detection",	42),			
+			new phrase("Buy a Teleport Scroll",	43),			
+			new phrase("Re-use courier",		44),			
+			new phrase("Deward please",			45),			
+			new phrase("Building Mekansm",		46),			
+			new phrase("Building Pipe",			47),			
+			new phrase("Let's smoke gank!",		59),			
+			new phrase("Stack and pull please",	48),			
+			new phrase("Pull creeps please",	49),			
+			new phrase("Pulling creeps",		50),			
+			new phrase("Stack neutrals",		51),			
+			new phrase("Jungling",				52),			
+			new phrase("Roshan",				53),			
+			new phrase("Okay.",					0),			
+			new phrase("Affirmative",			54),			
+			new phrase("Wait",					55),			
+			new phrase("Pause please!",			56),			
+			new phrase("Current Game Time",		57),			
+			new phrase("Check runes please",	58),			
+			new phrase("Well played!",			7),			
+			new phrase("Good luck, have fun",	60),			
+			new phrase("Nice",					61),			
+			new phrase("Thanks!",				62),			
+			new phrase("Sorry",					63),			
+			new phrase("Don't give up!",		64),			
+			new phrase("That just happened",	65),			
+			new phrase("Game is hard",			66),
+			new phrase("New meta",				67),
+			new phrase("My bad",				68),
+			new phrase("I immediately regret my decision",	69),		
+			new phrase("Relax, you're doing fine",			70)
+		];
+	</script>
+	<div id="dialog-overlay"></div>
+	<div id="title-container">
+		<h1> Dota 2 Chat Wheel Scripting </h1>
+		<p> Make your own chat wheels and bind them to different keys! </p>
+	</div>
+	<div class="container">
+		<div class="left">
+			<span class='helper'></span><img id='wheel' src="wheel.png">
+		</div>
+		<div class="right">
+			<script>
+				for(var i=0; i<8; i++) {
+					var phrase = phraseList[i].name;
+					$('.right').append("<div id=\"box"+i+"\" class=\"box\">\n<div class='box-text'>"+phrase+"</div>\n</div>");
+				}
+			</script>
+		</div>
+		<div style="clear:both"> </div>
+	</div>
+
+	<div id="dialog">
+		<h1> Phrases </h1>
+		<div id='dialog-scroll-list'>
+			<script>		
+				//Set up the phrase selection dialog.
+				var dialog = $('#dialog-scroll-list');
+				for(var i=0; i<phraseList.length; i++) {
+					if(i==0) dialog.append("<hr><h2> POSITIONING </h2>");
+					if(i==16) dialog.append("<hr><h2> STATUS </h2>");
+					if(i==22) dialog.append("<hr><h2> ENEMY </h2>");
+					if(i==31) dialog.append("<hr><h2> LANE </h2>");
+					if(i==36) dialog.append("<hr><h2> ITEMS </h2>");
+					if(i==47) dialog.append("<hr><h2> NEUTRALS </h2>");
+					if(i==53) dialog.append("<hr><h2> MISC </h2>");
+					if(i==59) dialog.append("<hr><h2> FLAVOR </h2>");
+					dialog.append("<div class='dialog-text'>"+phraseList[i].name+"</div>");
+				}
+			</script>
+		</div>
+	</div>
+
+</body>
+
+<script>
+	$(document).ready(function() {
+
+		var targetBox = null;
+
+		$('.box').click(function(e) {
+			targetBox = $(this);
+			$('#dialog').fadeIn(200);
+			$('#dialog-overlay').fadeIn(200);
+		});
+
+		$('.box').mouseenter(function(e) {
+			$('#wheel').attr("src","wheel_"+e.target.id+".png");
+		});
+
+		$('.box').mouseleave(function(e) {
+			$('#wheel').attr("src","wheel.png");
+		});
+
+		$(".dialog-text").click(function(e) {
+			targetBox.children('.box-text').text($(this).text());
+			$('#dialog').fadeOut(200);
+			$('#dialog-overlay').fadeOut(200);
+		});
+	});
+</script>
+
+
+</html>

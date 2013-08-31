@@ -1,0 +1,152 @@
+@charset "utf-8";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700);
+
+html {
+	font-family: 'Open Sans', sans-serif;
+	background: #111;
+}
+
+p {
+	text-align:center;
+	font-size:12px;
+	color:#ddd;
+}
+
+
+hr {
+	box-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+	margin-top: 32px;
+}
+
+h1 {
+	text-align:center;
+	font-size:32px;
+	color:#ddd;
+}
+
+h2 {
+	text-align:center;
+	font-size:24px;
+	color:#ddd;
+}
+
+.dialog-text {
+	text-align:left;
+	font-size:12px;
+	color:#999;
+	position:relative;
+	left:8px;
+	top:6px;
+	width:256px;
+	height:32px;
+	margin:2px 8px;
+	padding: 2px;
+	background-color: rgba(100,100,100,0);
+}
+
+.dialog-text:hover {
+	color:#fff;
+	background-color: rgba(100,100,100,1);
+}
+
+.img-wheel {
+	vertical-align: middle;
+	max-height:196px;
+	max-width: 196px;
+}
+
+.box {
+	margin:0px;
+	padding:0px;
+	width:310px;
+	height:32px;
+	background-image:url("box.png");
+}
+
+.box:hover {
+	background-image:url("box-hover.png");
+}
+
+.box-text {
+	text-align:left;
+	font-size:12px;
+	color:#999;
+	position:relative;
+	left:8px;
+	top:6px;
+	width:256px;
+	height:32px;
+	margin:0px;
+	pointer-events: none;
+}
+
+.container {
+	margin: auto auto 16px auto;
+	padding: 16px;
+	border-radius: 5px;
+	box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+	background: #181818;
+	width:800px;
+	text-align: center;
+}
+
+
+.left {
+	float: left;
+	position:relative;
+	top: 11px;
+	height: 196px;
+	width: 196px;
+	text-align: center; 
+	margin: 16px;
+}
+
+.right {
+	float: left;
+	margin:0px;
+	padding:0px 16px;
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    float: left;
+    vertical-align: middle;
+}
+
+#dialog-overlay {
+	position:fixed;
+	display:none;
+	margin:0px;
+	width:100%;
+	height:100%;
+	background-color:#000;
+	opacity:0.7;
+	z-index:500;
+}
+
+#dialog-scroll-list {
+	overflow: auto;
+	height: 500px;
+}
+
+#dialog {
+	display:none;
+	position:fixed;
+	top:50%;
+	left:50%;
+	margin: -300px auto auto -200px;
+	width: 400px;
+	height: 600px;
+	background-color: #444;
+	box-shadow: 0px 0px 10px rgba(155,155,155,0.5);
+	z-index:1000;
+}
+
+#title-container {
+	margin: auto auto 16px auto;
+	padding: 16px;
+	border-radius: 5px;
+	box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+	background: #333;
+}
