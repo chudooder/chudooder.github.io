@@ -26,33 +26,39 @@ h1 {
 
 h2 {
 	text-align:center;
+	margin-bottom: 0px;
 	font-size:24px;
 	color:#ddd;
 }
+
+div#preload { display: none; }
 
 .dialog-text {
 	text-align:left;
 	font-size:12px;
 	color:#999;
-	position:relative;
-	left:8px;
-	top:6px;
-	width:256px;
-	height:32px;
-	margin:2px 8px;
+	width:378px;
+	height:24px;
 	padding: 2px;
 	background-color: rgba(100,100,100,0);
 }
 
 .dialog-text:hover {
 	color:#fff;
+	background-color: rgba(120,120,120,1);
+}
+
+.dialog-text:active {
 	background-color: rgba(100,100,100,1);
 }
 
-.img-wheel {
+.wheel {
 	vertical-align: middle;
 	max-height:196px;
 	max-width: 196px;
+	transition: transform 0.1s;
+	/*Chrome lel*/
+	-webkit-transition: -webkit-transform 0.1s;
 }
 
 .box {
@@ -60,11 +66,11 @@ h2 {
 	padding:0px;
 	width:310px;
 	height:32px;
-	background-image:url("box.png");
+	background-image:url("../img/box.png");
 }
 
 .box:hover {
-	background-image:url("box-hover.png");
+	background-image:url("../img/box-hover.png");
 }
 
 .box-text {
@@ -82,12 +88,34 @@ h2 {
 
 .container {
 	margin: auto auto 16px auto;
-	padding: 16px;
+	padding: 16px 16px;
 	border-radius: 5px;
 	box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
 	background: #181818;
-	width:800px;
+	max-width:800px;
 	text-align: center;
+}
+
+.done-button {
+	margin: auto;
+	padding: 16px;
+	border-radius: 5px;
+	box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+	background: #004000;
+	width: 128px;
+	height: 50px;
+	text-align: center;
+}
+
+.done-button:hover {
+	background: #006000;
+}
+
+.done-button-text {
+	margin: 0;
+	text-align:center;
+	font-size:32px;
+	color:#ddd;
 }
 
 
@@ -105,6 +133,23 @@ h2 {
 	float: left;
 	margin:0px;
 	padding:0px 16px;
+}
+
+.moreright {
+	color: #ddd;
+	text-align: center;
+	float: left;
+	width: 150px;
+	margin: 0px;
+	padding: 16px 16px;
+}
+
+.key {
+	border-style: solid;
+	text-align:center;
+	margin: 0% 50%;
+	width: 64px;
+	height: 64px;
 }
 
 .helper {
@@ -128,6 +173,10 @@ h2 {
 #dialog-scroll-list {
 	overflow: auto;
 	height: 500px;
+	background-color:#222;
+	border-style:inset;
+	border-width:3px;
+	border-color:#282828;
 }
 
 #dialog {
@@ -136,9 +185,10 @@ h2 {
 	top:50%;
 	left:50%;
 	margin: -300px auto auto -200px;
+	padding: 16px;
 	width: 400px;
 	height: 600px;
-	background-color: #444;
+	background-color: #333;
 	box-shadow: 0px 0px 10px rgba(155,155,155,0.5);
 	z-index:1000;
 }
@@ -149,4 +199,18 @@ h2 {
 	border-radius: 5px;
 	box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
 	background: #333;
+}
+
+::-webkit-scrollbar {
+	width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
