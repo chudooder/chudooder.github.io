@@ -225,11 +225,6 @@
 	keyMap[220] = new keybind("\\","\\");
 	keyMap[221] = new keybind("]","]");
 	keyMap[222] = new keybind("'","'");
-	
-	for(var i=0; i<8; i++) {
-		var phrase = phraseList[i].name;
-		$('.right').append("<div class=\"box number"+i+"\">\n<div class='box-text'>"+phrase+"</div>\n</div>");
-	}
 
 	//Set up the phrase selection dialog.
 	var dialog = $('#dialog-scroll-list');
@@ -252,6 +247,7 @@
 
 		var targetBox = null;
 		var targetIndex = -1;
+		var targetWheel = -1;
 		//Holds data for the selected phrases
 		var selections = [];
 		var keySelections = [];
@@ -261,8 +257,8 @@
 			$('.box').click(function(e) {
 				targetBox = $(this);
 				var txt = e.target.className;
-				var num = txt.charAt(txt.length-1);
-				targetIndex = num;
+				targetIndex = parseInt(txt.charAt(txt.length-1));
+				targetWheel = parseInt(txt.charAt(txt.length-3)+txt.charAt(txt.length-2));
 				$('#dialog').fadeIn(200);
 				$('#dialog-overlay').fadeIn(200);
 			});
@@ -298,7 +294,7 @@
 		$(".dialog-text").click(function(e) {
 			var txt = e.target.className;
 			var num = parseInt(txt.charAt(txt.length-2)+txt.charAt(txt.length-1));
-			selections[0][targetIndex] = num;
+			selections[targetWheel][targetIndex] = num;
 			targetBox.children('.box-text').text($(this).text());
 			$('#dialog').fadeOut(200);
 			$('#dialog-overlay').fadeOut(200);
@@ -346,7 +342,7 @@
 			$('#wheels').append("<div class='container'><div class='left'><span class='helper'></span><img class='wheel' src='img/wheel.png'></div><div class='right'></div><div class='moreright'>Select a key:<input class='key "+str+"' onkeydown='return false;'></div><div style='clear:both'></div></div>");
 			for(var i=0; i<8; i++) {
 				var phrase = phraseList[i].name;
-				$('.right:last').append("<div class=\"box number"+i+"\">\n<div class='box-text'>"+phrase+"</div>\n</div>");
+				$('.right:last').append("<div class=\"box number"+str+""+i+"\">\n<div class='box-text'>"+phrase+"</div>\n</div>");
 			}
 			if(light) {
 				$('.container:last').css("background-color", "#222");
