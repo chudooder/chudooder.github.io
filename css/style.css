@@ -37,7 +37,7 @@ div#preload { display: none; }
 	text-align:left;
 	font-size:12px;
 	color:#999;
-	width:378px;
+	width:370px;
 	height:24px;
 	padding: 2px;
 	background-color: rgba(100,100,100,0);
@@ -207,6 +207,7 @@ div#preload { display: none; }
 	overflow: auto;
 	height: 500px;
 	background-color:#222;
+	border-radius: 3px;
 	border-style:inset;
 	border-width:3px;
 	border-color:#282828;
@@ -217,12 +218,13 @@ div#preload { display: none; }
 	position:fixed;
 	top:50%;
 	left:50%;
+	border-radius: 5px;
 	margin: -300px auto auto -200px;
 	padding: 16px;
 	width: 400px;
 	height: 600px;
 	background-color: #333;
-	box-shadow: 0px 0px 10px rgba(155,155,155,0.5);
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
 	z-index:1000;
 }
 
