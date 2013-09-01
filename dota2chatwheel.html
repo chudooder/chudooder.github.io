@@ -13,21 +13,6 @@
 	</div>
 	<div id="wheels">
 
-	<!--
-		<div class="container">
-			<div class="left">
-				<span class='helper'></span><img class='wheel' src="img/wheel.png">
-			</div>
-			<div class="right">
-				
-			</div>
-			<div class="moreright">
-				Select a key:
-				<input class="key 00" autocorrect="off">
-			</div>
-			<div style="clear:both"> </div>
-		</div>
-	-->
 	</div>
 
 	<div id="dialog">
@@ -357,7 +342,7 @@
 			} else {
 				str = ""+num;
 			}
-			$('#wheels').append("<div class='container'><div class='left'><span class='helper'></span><img class='wheel' src='img/wheel.png'></div><div class='right'></div><div class='moreright'>Select a key:<input class='key "+str+"'></div><div style='clear:both'></div></div>");
+			$('#wheels').append("<div class='container'><div class='left'><span class='helper'></span><img class='wheel' src='img/wheel.png'></div><div class='right'></div><div class='moreright'>Select a key:<input class='key "+str+"' onkeydown='return false;'></div><div style='clear:both'></div></div>");
 			for(var i=0; i<8; i++) {
 				var phrase = phraseList[i].name;
 				$('.right:last').append("<div class=\"box number"+i+"\">\n<div class='box-text'>"+phrase+"</div>\n</div>");
