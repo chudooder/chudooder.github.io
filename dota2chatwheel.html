@@ -37,6 +37,7 @@
 			Nothing here yet!
 		</div>
 		<hr>
+		<p> Remember to unbind the original chat wheel key from inside Dota 2, or else things will mess up. </p>
 	</div>
 
 </body>
@@ -326,7 +327,7 @@
 				var key = keyMap[keySelections[k]].scriptname;
 				script += "bind "+key+" \"+chatwheel; chat"+k+"\"<br/>alias chat"+k+" \""
 				for(var i=0; i<8; i++) {
-					script += "chat_wheel_phrase_"+i+" "+selections[0][i]+";";
+					script += "chat_wheel_phrase_"+i+" "+phraseList[selections[k][i]].gameindex+";";
 				}
 				script += "\"<br/>";
 			}
