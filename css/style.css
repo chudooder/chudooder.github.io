@@ -92,18 +92,26 @@ div#preload { display: none; }
 	border-radius: 5px;
 	box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
 	background: #181818;
-	max-width:800px;
+	width:800px;
 	text-align: center;
 }
 
+#wrapper {
+	margin: 0px auto;
+	width: 320px;
+	height: 56px;
+}
+
 .done-button {
-	margin: auto;
+	float: left;
+	vertical-align: middle;
 	padding: 16px;
+	margin: 0px 16px;
 	border-radius: 5px;
 	box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
 	background: #004000;
-	width: 128px;
-	height: 50px;
+	width: 64px;
+	height: 24px;
 	text-align: center;
 }
 
@@ -111,10 +119,27 @@ div#preload { display: none; }
 	background: #006000;
 }
 
-.done-button-text {
+.add-button {
+	float: left;
+	vertical-align: middle;
+	padding: 16px;
+	margin: 0px 16px;
+	border-radius: 5px;
+	box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+	background: #444;
+	width: 128px;
+	height: 24px;
+	text-align: center;
+}
+
+.add-button:hover {
+	background: #666;
+}
+
+.add-button-text, .done-button-text {
 	margin: 0;
 	text-align:center;
-	font-size:32px;
+	font-size:16px;
 	color:#ddd;
 }
 
@@ -132,6 +157,7 @@ div#preload { display: none; }
 .right {
 	float: left;
 	margin:0px;
+	width: 310px;
 	padding:0px 16px;
 }
 
@@ -139,16 +165,23 @@ div#preload { display: none; }
 	color: #ddd;
 	text-align: center;
 	float: left;
-	width: 150px;
-	margin: 0px;
-	padding: 16px 16px;
+	width: 198px;
+	height: 196px;
+	margin: 16px;
 }
 
 .key {
 	border-style: solid;
+	border-color: #000;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 24px;
+	color: #ddd;
+	background-color: #333;
 	text-align:center;
-	margin: 0% 50%;
-	width: 64px;
+	position: relative;
+	top: 56px;
+	width: 128px;
+	margin: auto;
 	height: 64px;
 }
 
@@ -191,6 +224,23 @@ div#preload { display: none; }
 	background-color: #333;
 	box-shadow: 0px 0px 10px rgba(155,155,155,0.5);
 	z-index:1000;
+}
+
+#script-box {
+	display:none;
+	margin: 16px auto;
+	padding: 16px;
+	width:600px;
+	background-color: #333;
+	border-radius: 5px;
+	box-shadow:0px 4px 10px rgba(0,0,0,0.5);
+}
+
+#script-text {
+	margin: 32px;
+	color: #ddd;
+	font-family: 'Courier New', monospace;
+	font-size: 12px;
 }
 
 #title-container {

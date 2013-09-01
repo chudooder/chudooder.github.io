@@ -11,34 +11,51 @@
 		<h1> Dota 2 Chat Wheel Scripting </h1>
 		<p> Make your own chat wheels and bind them to different keys! </p>
 	</div>
+	<div id="wheels">
 
-	<div class="container">
-		<div class="left">
-			<span class='helper'></span><img class='wheel' src="img/wheel.png">
-		</div>
-		<div class="right">
-			<!-- Generated later -->
-		</div>
-		<div class="moreright">
-			Select a key:
-			<div class="key">
-
+	<!--
+		<div class="container">
+			<div class="left">
+				<span class='helper'></span><img class='wheel' src="img/wheel.png">
 			</div>
+			<div class="right">
+				
+			</div>
+			<div class="moreright">
+				Select a key:
+				<input class="key 00" autocorrect="off">
+			</div>
+			<div style="clear:both"> </div>
 		</div>
-		<div style="clear:both"> </div>
+	-->
 	</div>
-
 
 	<div id="dialog">
 		<h1> Phrases </h1>
 		<div id='dialog-scroll-list'>
-			<!-- Generated later -->
+			
+		</div>
+	</div>
+	<div id="wrapper">
+		<div class="add-button">
+			<div class="add-button-text">Add Chat Wheel</div>
+		</div>
+		<div class="done-button">
+			<div class="done-button-text">Done!</div>
 		</div>
 	</div>
 
-	<div class="done-button">
-		<div class="done-button-text">Done!</h1>
+	<div id="script-box">
+		<p> Paste this into your autoexec.cfg file: </p>
+		<hr>
+		<div id="script-text">
+			Nothing here yet!
+		</div>
+		<hr>
 	</div>
+
+
+	<p> Chu 2013 </p>
 
 </body>
 
@@ -123,6 +140,109 @@
 		new phrase("Relax, you're doing fine",			70)
 	];
 
+	function keybind(name, scriptname) {
+		this.name = name;
+		this.scriptname = scriptname;
+	}
+
+	var keyMap = [];
+	keyMap[8] = new keybind("Backspace", "BACKSPACE");
+	keyMap[9] = new keybind("Tab", "TAB");
+	keyMap[13] = new keybind("Enter", "ENTER");
+	keyMap[16] = new keybind("Shift", "SHIFT");
+	keyMap[17] = new keybind("Ctrl", "CTRL");
+	keyMap[18] = new keybind("Alt", "ALT");
+	keyMap[19] = new keybind("Pause", "NUMLOCK");		//don't ask
+	keyMap[20] = new keybind("Caps Lock", "CAPSLOCK");
+	keyMap[27] = new keybind("Escape", "ESCAPE");
+	keyMap[33] = new keybind("Page Up", "PGUP");
+	keyMap[34] = new keybind("Page Down", "PGDN");
+	keyMap[35] = new keybind("End", "END");
+	keyMap[36] = new keybind("Home", "HOME");
+	keyMap[37] = new keybind("Left arrow", "LEFTARROW");
+	keyMap[38] = new keybind("Up arrow", "UPARROW");
+	keyMap[39] = new keybind("Right arrow", "RIGHTARROW");
+	keyMap[40] = new keybind("Down arrow", "DOWNARROW");
+	keyMap[45] = new keybind("Insert", "INS");
+	keyMap[46] = new keybind("Delete", "DEL");
+	keyMap[48] = new keybind("0", "0");
+	keyMap[49] = new keybind("1", "1");
+	keyMap[50] = new keybind("2", "2");
+	keyMap[51] = new keybind("3", "3");
+	keyMap[52] = new keybind("4", "4");
+	keyMap[53] = new keybind("5", "5");
+	keyMap[54] = new keybind("6", "6");
+	keyMap[55] = new keybind("7", "7");
+	keyMap[56] = new keybind("8", "8");
+	keyMap[57] = new keybind("9", "9");
+	keyMap[65] = new keybind("A", "A");
+	keyMap[66] = new keybind("B", "B");
+	keyMap[67] = new keybind("C", "C");
+	keyMap[68] = new keybind("D", "D");
+	keyMap[69] = new keybind("E", "E");
+	keyMap[70] = new keybind("F", "F");
+	keyMap[71] = new keybind("G", "G");
+	keyMap[72] = new keybind("H", "H");
+	keyMap[73] = new keybind("I", "I");
+	keyMap[74] = new keybind("J", "J");
+	keyMap[75] = new keybind("K", "K");
+	keyMap[76] = new keybind("L", "L");
+	keyMap[77] = new keybind("M", "M");
+	keyMap[78] = new keybind("N", "N");
+	keyMap[79] = new keybind("O", "O");
+	keyMap[80] = new keybind("P", "P");
+	keyMap[81] = new keybind("Q", "Q");
+	keyMap[82] = new keybind("R", "R");
+	keyMap[83] = new keybind("S", "S");
+	keyMap[84] = new keybind("T", "T");
+	keyMap[85] = new keybind("U", "U");
+	keyMap[86] = new keybind("V", "V");
+	keyMap[87] = new keybind("W", "W");
+	keyMap[88] = new keybind("X", "X");
+	keyMap[89] = new keybind("Y", "Y");
+	keyMap[90] = new keybind("Z", "Z");
+	keyMap[91] = new keybind("Left Windows", "LWIN");
+	keyMap[92] = new keybind("Right Windows", "RWIN");
+	keyMap[96] = new keybind("Numpad 0", "KP_INS");
+	keyMap[97] = new keybind("Numpad 1", "KP_END");
+	keyMap[98] = new keybind("Numpad 2", "KP_DOWNARROW");
+	keyMap[99] = new keybind("Numpad 3", "KP_PGDN");
+	keyMap[100] = new keybind("Numpad 4", "KP_LEFTARROW");
+	keyMap[101] = new keybind("Numpad 5", "KP_5");
+	keyMap[102] = new keybind("Numpad 6", "KP_RIGHTARROW");
+	keyMap[103] = new keybind("Numpad 7", "KP_HOME");
+	keyMap[104] = new keybind("Numpad 8", "KP_UPARROW");
+	keyMap[105] = new keybind("Numpad 9", "KP_PGUP");
+	keyMap[106] = new keybind("* (Keypad)", "KP_MULTIPLY");
+	keyMap[107] = new keybind("+ (Keypad)", "KP_PLUS");
+	keyMap[109] = new keybind("- (Keypad)", "KP_MINUS");
+	keyMap[110] = new keybind(". (Keypad)", "KP_DEL");
+	keyMap[111] = new keybind("/ (Keypad)", "KP_SLASH");
+	keyMap[112] = new keybind("F1","F1");
+	keyMap[113] = new keybind("F2","F2");
+	keyMap[114] = new keybind("F3","F3");
+	keyMap[115] = new keybind("F4","F4");
+	keyMap[116] = new keybind("F5","F5");
+	keyMap[117] = new keybind("F6","F6");
+	keyMap[118] = new keybind("F7","F7");
+	keyMap[119] = new keybind("F8","F8");
+	keyMap[120] = new keybind("F9","F9");
+	keyMap[121] = new keybind("F10","F10");
+	keyMap[122] = new keybind("F11","F11");
+	keyMap[123] = new keybind("F12","F12");
+	keyMap[145] = new keybind("Scroll Lock", "SCROLLOCK");
+	keyMap[186] = new keybind(";","SEMICOLON");
+	keyMap[187] = new keybind("=","=");
+	keyMap[188] = new keybind(",",",");
+	keyMap[189] = new keybind("-","-");
+	keyMap[190] = new keybind(".",".");
+	keyMap[191] = new keybind("/","/");
+	keyMap[192] = new keybind("`","`");
+	keyMap[219] = new keybind("[","[");
+	keyMap[220] = new keybind("\\","\\");
+	keyMap[221] = new keybind("]","]");
+	keyMap[222] = new keybind("'","'");
+	
 	for(var i=0; i<8; i++) {
 		var phrase = phraseList[i].name;
 		$('.right').append("<div class=\"box number"+i+"\">\n<div class='box-text'>"+phrase+"</div>\n</div>");
@@ -151,29 +271,46 @@
 		var targetIndex = -1;
 		//Holds data for the selected phrases
 		var selections = [];
-		selections[0] = [0,1,2,3,4,5,6,7];
+		var keySelections = [];
+		var light = false;
 
-		$('.box').click(function(e) {
-			targetBox = $(this);
-			var txt = e.target.className;
-			var num = txt.charAt(txt.length-1);
-			targetIndex = num;
-			$('#dialog').fadeIn(200);
-			$('#dialog-overlay').fadeIn(200);
-		});
+		var addListeners = function() {
+			$('.box').click(function(e) {
+				targetBox = $(this);
+				var txt = e.target.className;
+				var num = txt.charAt(txt.length-1);
+				targetIndex = num;
+				$('#dialog').fadeIn(200);
+				$('#dialog-overlay').fadeIn(200);
+			});
 
-		$('.box').mouseenter(function(e) {
-			var txt = e.target.className;
-			var num = txt.charAt(txt.length-1);
-			var deg = num*45;
-			$('.wheel').css("transform","rotate("+deg+"deg)");
-			$('.wheel').css("-webkit-transform","rotate("+deg+"deg)");
-		});
+			$('.box').mouseenter(function(e) {
+				var txt = e.target.className;
+				var num = txt.charAt(txt.length-1);
+				var deg = num*45;
+				var wheel = $(this).parent().parent().children(".left").children(".wheel");
+				wheel.css("transform","rotate("+deg+"deg)");
+				wheel.css("-webkit-transform","rotate("+deg+"deg)");
+			});
 
-		$('.box').mouseleave(function(e) {
-			$('.wheel').css("transform","rotate(0deg)");
-			$('.wheel').css("-webkit-transform","rotate(0deg)");
-		});
+			$('.box').mouseleave(function(e) {
+				var wheel = $(this).parent().parent().children(".left").children(".wheel");
+				wheel.css("transform","rotate(0deg)");
+				wheel.css("-webkit-transform","rotate(0deg)");
+			});
+
+			$(".key").keypress(function(e){
+				return false;
+			});
+
+			$(".key").keydown(function(e){
+				var charCode = (e.which) ? e.which : event.keyCode;
+				var txt = e.target.className;
+				var num = parseInt(txt.charAt(txt.length-2)+txt.charAt(txt.length-1));
+				keySelections[num] = charCode;
+				e.target.value = keyMap[charCode].name;
+			});
+		}
 
 		$(".dialog-text").click(function(e) {
 			var txt = e.target.className;
@@ -190,6 +327,10 @@
 			makeConfig();
 		});
 
+		$(".add-button").click(function(e) {
+			makeContainer();
+		});
+
 		$("#dialog-overlay").click(function(e) {
 			targetBox = null;
 			targetIndex = -1;
@@ -199,13 +340,42 @@
 
 		var makeConfig = function() {
 			var script = "";
-			script += "bind y \"+chatwheel; chat0\"\nalias chat0\""
-			for(var i=0; i<8; i++) {
-				script += "chat_wheel_phrase_"+i+" "+selections[0][i]+";";
+			for(var k=0; k<selections.length; k++) {
+				var key = keyMap[keySelections[k]].scriptname;
+				script += "bind "+key+" \"+chatwheel; chat"+k+"\"<br/>alias chat"+k+" \""
+				for(var i=0; i<8; i++) {
+					script += "chat_wheel_phrase_"+i+" "+selections[0][i]+";";
+				}
+				script += "\"<br/>";
 			}
-			script += "\"";
-			alert(script);
+			$("#script-box").show();
+			$("#script-text").html(script);
 		}
+
+		var makeContainer = function() {
+			var num = selections.length;
+			var str = "";
+			if(num < 10) {
+				str = "0"+num;
+			} else {
+				str = ""+num;
+			}
+			$('#wheels').append("<div class='container'><div class='left'><span class='helper'></span><img class='wheel' src='img/wheel.png'></div><div class='right'></div><div class='moreright'>Select a key:<input class='key "+str+"'></div><div style='clear:both'></div></div>");
+			for(var i=0; i<8; i++) {
+				var phrase = phraseList[i].name;
+				$('.right:last').append("<div class=\"box number"+i+"\">\n<div class='box-text'>"+phrase+"</div>\n</div>");
+			}
+			if(light) {
+				$('.container:last').css("background-color", "#222");
+			}
+			light = !light;
+			addListeners();
+			selections[selections.length] = [0,1,2,3,4,5,6,7];
+			keySelections[keySelections.length] = 0;
+		}
+
+		makeContainer();
+
 
 	});
 </script>
