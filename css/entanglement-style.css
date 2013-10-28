@@ -13,6 +13,10 @@ h1 {
 	color: #000;
 }
 
+a:link {
+	text-decoration : none;
+}
+
 .button {
 	width: 100px;
 	margin-left: auto;
