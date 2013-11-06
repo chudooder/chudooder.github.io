@@ -78,10 +78,11 @@ a:link {
 	clear:both;
 }
 
-.survey {
+.changelog {
 	clear:both;
 	margin-top:50px;
 	margin-bottom:50px;
+	line-height:100%;
 }
 
 .footer {
