@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+  <title> D3 osu!web </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <style>
+    /* change to osu! font */
+    body {
+      font-family: 'Arial';
+    }
+
+    .axis text {
+      fill: #777;
+    }
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #AAA;
+      stroke-width: 1.0px;
+      shape-rendering: auto;
+    }
+
+    .line {
+      fill: none;
+      stroke: #BB1177;
+      stroke-width: 3.0px;
+    }
+
+    .rank {
+      font-family: 'Arial';
+      font-weight: bold;
+    }
+
+    .days {
+      font-size: 12px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="rankings"></div>
+<svg width='100' height='100'>
+
+</svg>
+
+<script>
+"use strict";
+
+// graph size and axes
+var margin = {top: 100, right: 50, bottom: 30, left: 100},
+  width = 960 - margin.left - margin.right,
+  height = 500 - margin.top - margin.bottom;
+
+var x = d3.time.scale()
+  .range([0, width]);
+
+var y = d3.scale.linear()
+  .range([height, 0]);
+
+var color = d3.interpolateLab("#777", "#EFEFEF");
+
+console.log(color(0))
+console.log(color(0.5))
+console.log(color(1.0))
+
+var xAxis = d3.svg.axis()
+  .scale(x)
+  .ticks(5)
+  .innerTickSize(-height)
+  .outerTickSize(0)
+  .tickPadding(5)
+  .tickFormat(function(d) {
+    return d3.time.format('%b %Y')(d)
+  })
+  .orient("bottom");
+
+var yAxis = d3.svg.axis()
+  .scale(y)
+  .ticks(3)
+  .innerTickSize(-width)
+  .orient("left");
+
+// helper functions for dates
+var parseDate = d3.time.format('%Y-%m-%d').parse;
+var bisectDate = d3.bisector(function(d) { return d.date; }).left;
+
+var line = d3.svg.line()
+  .interpolate('cardinal')
+  .x(function(d) { return x(d.date); })
+  .y(function(d) { return y(d.rank); });
+
+var svg = d3.select('.rankings').append('svg')
+  .attr('id', 'ranking-chart')
+  .attr('width', width + margin.left + margin.right)
+  .attr('height', height + margin.top + margin.bottom)
+  .attr('viewBox', '0 0 ' + (width + margin.left + margin.right) + ' ' + (height + margin.top + margin.bottom))
+  .attr('preserveAspectRatio', 'xMidYMid')
+  .append('g')
+  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+// graphing things
+var data = {
+  'rankings': [
+    {'date': '2013-10-01', 'rank': 25},
+    {'date': '2013-10-16', 'rank': 10},
+    {'date': '2013-11-01', 'rank': 46},
+    {'date': '2013-11-16', 'rank': 10},
+    {'date': '2013-12-01', 'rank': 46},
+    {'date': '2013-12-16', 'rank': 10},
+    {'date': '2014-01-01', 'rank': 60},
+    {'date': '2014-01-16', 'rank': 42},
+    {'date': '2014-02-01', 'rank': 50},
+    {'date': '2014-02-16', 'rank': 52},
+    {'date': '2014-03-01', 'rank': 59},
+    {'date': '2014-03-16', 'rank': 52},
+    {'date': '2014-04-01', 'rank': 43},
+    {'date': '2014-04-16', 'rank': 52},
+    {'date': '2014-05-01', 'rank': 67},
+    {'date': '2014-05-16', 'rank': 52},
+    {'date': '2014-06-01', 'rank': 21},
+    {'date': '2014-06-16', 'rank': 32},
+    {'date': '2014-07-01', 'rank': 50},
+    {'date': '2014-07-16', 'rank': 52},
+    {'date': '2014-08-01', 'rank': 59},
+    {'date': '2014-08-16', 'rank': 52},
+    {'date': '2014-09-01', 'rank': 83},
+    {'date': '2014-09-16', 'rank': 82},
+    {'date': '2014-10-01', 'rank': 67},
+    {'date': '2014-10-16', 'rank': 62},
+    {'date': '2014-11-01', 'rank': 21},
+    {'date': '2014-11-16', 'rank': 152},
+    {'date': '2014-12-01', 'rank': 95},
+    {'date': '2014-12-16', 'rank': 92},
+    {'date': '2015-01-01', 'rank': 59},
+    {'date': '2015-01-16', 'rank': 52},
+    {'date': '2015-02-01', 'rank': 53},
+    {'date': '2015-02-16', 'rank': 52},
+    {'date': '2015-03-01', 'rank': 87},
+    {'date': '2015-03-16', 'rank': 82},
+    {'date': '2015-04-01', 'rank': 102},
+    {'date': '2015-04-16', 'rank': 122},
+    {'date': '2015-05-01', 'rank': 120},
+    {'date': '2015-05-16', 'rank': 120},
+    {'date': '2015-06-01', 'rank': 105},
+    {'date': '2015-06-16', 'rank': 125},
+    {'date': '2015-07-01', 'rank': 25},
+    {'date': '2015-07-16', 'rank': 52},
+    {'date': '2015-08-01', 'rank': 105},
+    {'date': '2015-08-16', 'rank': 125},
+    {'date': '2015-09-01', 'rank': 80},
+  ]
+};
+
+data.rankings.forEach(function(d) {
+  d.date = parseDate(d.date);
+});
+
+x.domain(d3.extent(data.rankings, function(d){ return d.date; }));
+y.domain(d3.extent(data.rankings, function(d){ return d.rank; }));
+
+svg.append('g')
+  .attr('class', 'x axis')
+  .attr('transform', 'translate(0,' + height + ')')
+  .call(xAxis);
+
+svg.append('g')
+  .attr('class', 'y axis')
+  .call(yAxis)
+  .selectAll('.tick line').each(function (d) {
+    var tick = d3.select(this);
+    var min = yAxis.scale().domain()[0]
+    var max = yAxis.scale().domain()[1]
+    tick.style("stroke", function(d) { return color((d - min) / (max - min)); })
+    tick.style("fill", function(d) { return color((d - min) / (max - min)); })
+  });
+
+var path = svg.append('path')
+  .datum(data.rankings)
+  .attr('class', 'line')
+  .attr('d', line);
+
+var len = path.node().getTotalLength();
+
+var focus = svg.append('g')
+  .style('display', 'none');
+
+focus.append('circle')
+    .attr('class', 'tooltip')
+    .style('fill', 'white')
+    .style('stroke', '#BB1177')
+    .style('stroke-width', 3)
+    .attr('r', 10);
+
+focus.append('path')
+    .attr('class', 'tooltip')
+    .attr('d', ' M -45 -50  \
+          l 90 0            \
+          a 5 5 0 0 1 5 5   \
+          l 0 40            \
+          a 5 5 0 0 1 -5 5  \
+          l -40 0           \
+          l -5 12           \
+          l -5 -12          \
+          l -40 0           \
+          a 5 5 0 0 1 -5 -5 \
+          l 0 -40           \
+          a 5 5 0 0 1 5 -5')
+    .attr('fill', '#BB1177')
+    .attr('stroke', '#FFF')
+    .attr('stroke-width', 2);
+
+focus.append('text')
+    .attr('class', 'tooltip days')
+    .attr('fill', '#FFF')
+    .attr('text-anchor', 'middle')
+
+focus.append('text')
+    .attr('class', 'tooltip rank')
+    .attr('fill', '#FFF')
+    .attr('text-anchor', 'middle')
+
+svg.append('rect')
+  .attr('width', width)
+  .attr('height', height)
+  .style('fill', 'none')
+  .style('pointer-events', 'all')
+  .on('mouseover', function() { focus.style('display', null) })
+  .on('mouseout', function() { focus.style('display', 'none'); })
+  .on('mousemove', mousemove)
+  .on('drag', mousemove);
+
+function mousemove() {
+  // get x position
+  var x0 = x.invert(d3.mouse(this)[0]),
+      i = bisectDate(data.rankings, x0, 1),
+      d0 = data.rankings[i-1],
+      d1 = data.rankings[i],
+      d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+
+  var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+  var today = new Date();
+
+  var diffDays = Math.round(Math.abs((today.getTime() - d.date.getTime())/(oneDay)));
+
+  var ANIM_LEN = 50;
+
+  focus.select('circle.tooltip')
+      .attr('transform', 'translate('+ x(d.date) + ',' + y(d.rank) + ')');
+
+  focus.select('path.tooltip')
+    .transition()   // smooth movement
+      .duration(ANIM_LEN)
+      .attr('transform', 'translate('+ x(d.date) + ',' + (y(d.rank) - 30) + ')');
+
+  focus.select('text.tooltip.rank')
+    .transition()   // smooth movement
+      .duration(ANIM_LEN)
+      .attr('transform', 'translate('+ x(d.date) + ',' + (y(d.rank) - 58) + ')')
+      .text('#' + d.rank)
+
+  focus.select('text.tooltip.days')
+    .transition()
+      .duration(ANIM_LEN)
+      .attr('transform', 'translate('+ x(d.date) + ',' + (y(d.rank) - 38) + ')')
+      .text(diffDays + ' days ago');
+}
+
+// responsive to resizing
+var aspect = 960 / 500,
+    chart = $("#ranking-chart");
+$(window).on("resize", function() {
+    var targetWidth = chart.parent().width();
+    chart.attr("width", targetWidth);
+    chart.attr("height", targetWidth / aspect);
+});
+
+</script>
+
+</body>
+</html>
